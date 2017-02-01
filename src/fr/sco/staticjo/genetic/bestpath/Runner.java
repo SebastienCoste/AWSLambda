@@ -40,15 +40,14 @@ public class Runner {
         Population<WorldMap> myPop = new Population<WorldMap>(size, true, WorldMap.class);
         
         PopulationDTO dto = new PopulationDTO(myPop);
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(dto));
+//        Gson gson = new Gson();
+//        System.out.println(gson.toJson(dto));
         
 		ex.setVisible(true);
 		
 		
 
         
-       System.exit(1);
         // Evolve our population until we reach an optimum solution
         int generationCount = 0;
         GeneticAlgo<WorldMap> algorithm = new GeneticPathAlgo(size);
