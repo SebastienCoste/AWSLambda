@@ -124,6 +124,11 @@ public class WorldMap implements Person, Serializable {
 	public static void setCalc(FitnessCalc calc) {
 		WorldMap.calc = calc;
 	}
+	
+	public WorldMap withCalc(FitnessCalc calc) {
+		WorldMap.calc = calc;
+		return this;
+	}
 
 	@Override
 	public String toString() {

@@ -18,6 +18,7 @@ import fr.sco.staticjo.graphics.DisplayPoint;
 import fr.sco.staticjo.graphics.DrawLine;
 import fr.sco.staticjo.graphics.SimpleDrawer;
 import fr.sco.staticjo.lambda.PopulationDTO;
+import fr.sco.staticjo.lambda.WorldMapLambda;
 
 public class Runner {
 
@@ -25,7 +26,7 @@ public class Runner {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 
         //Set variables before
-		int size = 100;
+		int size = 200;
 		int sizeMap= 100;
 		WorldMap.setDefaultGeneLength(size);
 		WorldMap.setPointList(new Point[size]);
@@ -34,15 +35,17 @@ public class Runner {
 		
 		WorldMap.setCalc(new PathCalculator());
 		List<DisplayPoint> points = Arrays.asList(WorldMap.getPointList());
-		SimpleDrawer ex = new SimpleDrawer(points, 500, sizeMap);
+		SimpleDrawer ex = new SimpleDrawer(points, 500, sizeMap +10);
 		
         // Create an initial population
         Population<WorldMap> myPop = new Population<WorldMap>(size, true, WorldMap.class);
         
         PopulationDTO dto = new PopulationDTO(myPop);
-//        Gson gson = new Gson();
-//        System.out.println(gson.toJson(dto));
-        
+        dto.setPointList(WorldMap.getPointList());
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(dto));
+        WorldMapLambda lamda = new WorldMapLambda();
+        lamda.handleRequest(dto, null);
 		ex.setVisible(true);
 		
 		
@@ -54,7 +57,7 @@ public class Runner {
         int fit = Integer.MAX_VALUE;
         int geneFit = 0;
         long init = new Date().getTime();
-		while (myPop.getFittest().getFitness() >= WorldMap.getCalc().getMaxFitness() && generationCount <900000) {
+		while (myPop.getFittest().getFitness() >= WorldMap.getCalc().getMaxFitness() && generationCount <10000000) {
             generationCount++;
             Person bestPath = myPop.getFittest();
 			int fittest = bestPath.getFitness();

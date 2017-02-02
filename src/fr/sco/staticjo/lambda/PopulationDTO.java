@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.stream.IntStream;
 
 import fr.sco.staticjo.genetic.Population;
+import fr.sco.staticjo.genetic.bestpath.Point;
 
 public class PopulationDTO implements Serializable{
 
@@ -13,7 +14,11 @@ public class PopulationDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private WorldMapDTO[] person;
 	private Integer popSize;
+	private Point[] pointList;
 	
+	public PopulationDTO(){
+		
+	}
 	public PopulationDTO(Population pop){
 		popSize = pop.size();
 		person = new WorldMapDTO[popSize];
@@ -34,5 +39,11 @@ public class PopulationDTO implements Serializable{
 
 	public void setPopSize(Integer popSize) {
 		this.popSize = popSize;
+	}
+	public Point[] getPointList() {
+		return pointList;
+	}
+	public void setPointList(Point[] pointList) {
+		this.pointList = pointList;
 	}
 }

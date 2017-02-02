@@ -11,9 +11,11 @@ import java.util.stream.IntStream;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
+import fr.sco.staticjo.genetic.FitnessCalc;
 import fr.sco.staticjo.genetic.GeneticAlgo;
 import fr.sco.staticjo.genetic.Person;
 import fr.sco.staticjo.genetic.Population;
+import fr.sco.staticjo.genetic.bestpath.PathCalculator;
 import fr.sco.staticjo.genetic.bestpath.WorldMap;
 
 public class WorldMapLambda implements RequestHandler<PopulationDTO, String>{
@@ -24,6 +26,9 @@ public class WorldMapLambda implements RequestHandler<PopulationDTO, String>{
 	public String handleRequest(PopulationDTO input, Context context) {
 		genomeMutationRate = Math.pow(1 - GeneticAlgo.mutationRate, input.getPopSize());
 		Population<WorldMap> pop = new Population<>(input.getPopSize(), false, WorldMap.class);
+		FitnessCalc calc = new PathCalculator();
+		WorldMap.setCalc(calc);
+		WorldMap.numberOfCities = input.getPopSize();
 		IntStream.range(0, input.getPopSize())
 		.forEach( e -> pop.savePerson(e, new WorldMap().withGenes(input.getPerson()[e].getGenes())));
 		Person generateChild;

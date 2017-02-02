@@ -1,13 +1,22 @@
 package fr.sco.staticjo.genetic.bestpath;
 
+import java.io.Serializable;
+
 import fr.sco.staticjo.graphics.DisplayPoint;
 
-public class Point implements DisplayPoint{
+public class Point implements DisplayPoint, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int x;
 	private int y;
 	private int id;
 	
+	public Point(){
+		
+	}
 	public Point(int id, int x, int y){
 		this.id = id;
 		this.x = x;
