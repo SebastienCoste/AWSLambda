@@ -28,6 +28,7 @@ public class WorldMapLambda implements RequestHandler<PopulationDTO, String>{
 		Population<WorldMap> pop = new Population<>(input.getPopSize(), false, WorldMap.class);
 		FitnessCalc calc = new PathCalculator();
 		WorldMap.setCalc(calc);
+		WorldMap.setPointList(input.getPointList());
 		WorldMap.numberOfCities = input.getPopSize();
 		IntStream.range(0, input.getPopSize())
 		.forEach( e -> pop.savePerson(e, new WorldMap().withGenes(input.getPerson()[e].getGenes())));
@@ -36,8 +37,8 @@ public class WorldMapLambda implements RequestHandler<PopulationDTO, String>{
 			generateChild = generateChild(pop);
 			StringBuilder sb = new StringBuilder();
 			IntStream.range(0, generateChild.geneSize())
-			.forEach( e -> sb.append(generateChild.getGene(e)));
-			return sb.toString();
+			.forEach( e -> sb.append(generateChild.getGene(e)).append(","));
+			return sb.substring(0, sb.length()-1).toString();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 			return "";
 		}

@@ -1,6 +1,9 @@
 package fr.sco.staticjo.genetic;
 
-import fr.sco.staticjo.genetic.multithread.ThreadPool;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import fr.sco.staticjo.genetic.multithread.PoolOfThreads;
 
 public class GeneticAlgo<P extends Person> {
 
@@ -11,13 +14,13 @@ public class GeneticAlgo<P extends Person> {
 	public static int numberOfThreads = 8;
 	public static boolean elitism = true;
 	private Class<P> classPerson;
-	private ThreadPool<P> pool;
+	private PoolOfThreads<P> pool;
 
-	public GeneticAlgo(int populationSize){
-		pool = new ThreadPool<P>(numberOfThreads, populationSize, this);
+	public GeneticAlgo(int populationSize)  throws MalformedURLException, IOException{
+		pool = new PoolOfThreads<P>(numberOfThreads, populationSize, this);
 	}
 
-	public GeneticAlgo(int populationSize, Class<P> clazz){
+	public GeneticAlgo(int populationSize, Class<P> clazz) throws MalformedURLException, IOException{
 		this(populationSize);
 		setClassPerson(clazz);
 	}

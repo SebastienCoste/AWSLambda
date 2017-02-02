@@ -108,6 +108,7 @@ public class WorldMap implements Person, Serializable {
 		return genes;
 	}
 
+	@Override
 	public void setGenes(Long[] genes) {
 		this.genes = genes;
 	}

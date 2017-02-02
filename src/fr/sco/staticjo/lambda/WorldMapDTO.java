@@ -26,4 +26,9 @@ public class WorldMapDTO implements Serializable{
 	public void setGenes(Long[] genes) {
 		this.genes = genes;
 	}
+	
+	public WorldMapDTO withGenes(Long[] genes) {
+		this.genes = genes;
+		return this;
+	}
 }

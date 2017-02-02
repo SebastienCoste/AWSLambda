@@ -9,6 +9,8 @@ public interface Person{
 	Long[] getGenes();
 
 	void setGene(int index, Long value);
+	
+	void setGenes(Long[] genes);
 
 	int getFitness();
 	

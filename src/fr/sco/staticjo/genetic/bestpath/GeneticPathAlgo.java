@@ -1,5 +1,7 @@
 package fr.sco.staticjo.genetic.bestpath;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,7 @@ public class GeneticPathAlgo extends GeneticAlgo<WorldMap> {
 	
 	private double genomeMutationRate;
 	
-	public GeneticPathAlgo(int populationSize){
+	public GeneticPathAlgo(int populationSize) throws MalformedURLException, IOException{
 		super(populationSize);
 		genomeMutationRate = Math.pow(1 - GeneticAlgo.mutationRate, WorldMap.numberOfCities);
 	}
